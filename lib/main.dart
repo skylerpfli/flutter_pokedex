@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_conch_plugin/annotation/conch_scope.dart';
+import 'package:flutter_conch_plugin/conch_dispatch.dart';
 import 'package:pokedex/app.dart';
 import 'package:pokedex/core/network.dart';
 import 'package:pokedex/data/repositories/item_repository.dart';
@@ -10,14 +13,30 @@ import 'package:pokedex/states/theme/theme_cubit.dart';
 import 'package:pokedex/states/item/item_bloc.dart';
 import 'package:pokedex/states/pokemon/pokemon_bloc.dart';
 
+bool useConch = true;
+
+@ConchScope()
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  if (useConch) {
+    var source = await rootBundle.loadString('assets/conch_data/conch_result.json');
+    ConchDispatch.instance.loadSource(source);
+    // ConchDispatch.instance.setLogger(LogLevel.Debug);
+    await ConchDispatch.instance.callStaticFun(library: 'package:pokedex/main.dart', funcName: 'mainInner');
+    return;
+  }
+
+  await mainInner();
+}
+
+mainInner() async {
   await LocalDataSource.initialize();
 
   runApp(
     MultiRepositoryProvider(
       providers: [
+
         ///
         /// Services
         ///
@@ -39,21 +58,24 @@ void main() async {
         /// Repositories
         ///
         RepositoryProvider<PokemonRepository>(
-          create: (context) => PokemonDefaultRepository(
-            localDataSource: context.read<LocalDataSource>(),
-            githubDataSource: context.read<GithubDataSource>(),
-          ),
+          create: (context) =>
+              PokemonDefaultRepository(
+                localDataSource: context.read<LocalDataSource>(),
+                githubDataSource: context.read<GithubDataSource>(),
+              ),
         ),
 
         RepositoryProvider<ItemRepository>(
-          create: (context) => ItemDefaultRepository(
-            localDataSource: context.read<LocalDataSource>(),
-            githubDataSource: context.read<GithubDataSource>(),
-          ),
+          create: (context) =>
+              ItemDefaultRepository(
+                localDataSource: context.read<LocalDataSource>(),
+                githubDataSource: context.read<GithubDataSource>(),
+              ),
         ),
       ],
       child: MultiBlocProvider(
         providers: [
+
           ///
           /// BLoCs
           ///
