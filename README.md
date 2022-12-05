@@ -1,6 +1,8 @@
-用于Conch热更新验证
+**Conch热更新体验工程**
 
-----
+切换到conchDynamic分支进行体验，使用参照 https://git.woa.com/flutter_components/FlutterDynamic/conch-demo
+
+---
 # Flutter Pokedex
 
 [![Awesome Flutter](https://img.shields.io/badge/Awesome-Flutter-blue.svg)](https://github.com/Solido/awesome-flutter)
