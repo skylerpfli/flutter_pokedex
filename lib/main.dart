@@ -20,8 +20,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   if (useConch) {
-    var source = await rootBundle.loadString('assets/conch_data/conch_result.json');
-    ConchDispatch.instance.loadSource(source);
+    var source = await rootBundle.load('assets/conch_build/patch_dat/conch_result.dat');
+    ConchDispatch.instance.loadByteSource(source);
     // ConchDispatch.instance.setLogger(LogLevel.Debug);
     await ConchDispatch.instance.callStaticFun(library: 'package:pokedex/main.dart', funcName: 'mainInner');
     return;
@@ -54,6 +54,7 @@ mainInner() async {
           create: (context) => GithubDataSource(context.read<NetworkManager>()),
         ),
 
+        ///
         ///
         /// Repositories
         ///
