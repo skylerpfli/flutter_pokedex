@@ -261,10 +261,10 @@ packages:
   flutter_conch_plugin:
     dependency: "direct main"
     description:
-      name: flutter_conch_plugin
-      url: "http://pub.oa.com"
-    source: hosted
-    version: "1.1.5"
+      path: "/Users/lipengfei/conch/conch-plugin"
+      relative: false
+    source: path
+    version: "1.1.4+3"
   flutter_test:
     dependency: "direct dev"
     description: flutter

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_conch_plugin/annotation/conch_scope.dart';
+import 'package:flutter_conch_plugin/annotation/patch_scope.dart';
 import 'package:flutter_conch_plugin/conch_dispatch.dart';
 import 'package:pokedex/app.dart';
 import 'package:pokedex/core/network.dart';
@@ -13,9 +13,9 @@ import 'package:pokedex/states/theme/theme_cubit.dart';
 import 'package:pokedex/states/item/item_bloc.dart';
 import 'package:pokedex/states/pokemon/pokemon_bloc.dart';
 
-bool useConch = true;
+bool useConch = false;
 
-@ConchScope()
+@PatchScope()
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
