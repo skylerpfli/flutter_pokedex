@@ -1,0 +1,1 @@
+{"flutterBuildId":"7c10799a59e99cf286ad33c6b58ef80e","description":"补丁所调用的图片信息（输入conch_base基准包信息，图片资源将自动拷贝）","projectPackageName":"pokedex","imageNoAnalysis":{"description":"无法解析图片的Asset，请检查并放入补丁中！","assets":[{"assetName":"VariableGetImpl(pokemon)","patchBuildId":"","package":"pokedex"}]}}
